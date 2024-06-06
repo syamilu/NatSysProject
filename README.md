@@ -1,11 +1,9 @@
 # Net&Sys Assignment: Running Containers for Application Development
 
-Group Name: __Fill your team name__. 
+Group Name: Escargot. 
 
 Team Mates:
-1. __Fill name__ and __matric no__
-2. __Fill name__ and __matric no__
-3. __Fill name__ and __matric no__
+1. Wan Muhammad Syamil bin W Mohd Yusof ( 2220561 )
 
 ## Rules
 1. You are allowed to have **3 group** members.
@@ -22,8 +20,8 @@ Team Mates:
 
 ***Questions:***
 
-1. What is the link of the fork Net&Sys Assignment in your repository. ***(1 mark)*** __Fill answer here__.
-2. How many files and folders are in this repository. ***(1 mark)*** __Fill answer here__.
+1. What is the link of the fork Net&Sys Assignment in your repository. ***(1 mark)*** __https://github.com/syamilu/NatSysProject__.
+2. How many files and folders are in this repository. ***(1 mark)*** __One folders with 6 file inside it, and 1 readme file__.
 
 
 ## Exploring github codespaces

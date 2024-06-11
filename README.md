@@ -572,20 +572,20 @@ busybox =  lightweight Unix utility that combines many common UNIX utilities int
 2. Explore the network using the command ```docker network ls```, show the output of your terminal. ***(1 mark)***
   <img src="./screenshot/docker_network_ls.png" width="70%">
 3. Using ```docker inspect c1``` and ```docker inspect c2``` inscpect the two network. What is the gateway of bluenet and rednet.? ***(1 mark)***
-```bash
-bluenet: "Gateway": "172.18.0.1",
-rednet: "Gateway": "172.19.0.1",
-```
+  ```bash
+  bluenet: "Gateway": "172.18.0.1",
+  rednet: "Gateway": "172.19.0.1",
+  ```
 4. What is the network address for the running container c1 and c2.
-```bash
-c1: "IPAddress": "172.18.0.2",
-c2: "IPAddress": "172.19.0.2",
-```
+  ```bash
+  c1: "IPAddress": "172.18.0.2",
+  c2: "IPAddress": "172.19.0.2",
+  ```
 5. Using the command ```docker exec c1 ping c2```, which basically issue a ping from container c1 to c2. Are you able to ping? Show your output . ***(1 mark)***
-```bash
-I can't ping
-```
-<img src="./screenshot/ping.png" width="70%">
+  ```bash
+  I can't ping
+  ```
+  <img src="./screenshot/ping.png" width="70%">
 
 ## Bridging two SUB Networks
 1. Let's try this again by creating a network to bridge the two containers in the two subnetworks

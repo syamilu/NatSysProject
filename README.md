@@ -4,6 +4,7 @@ Group Name: Escargot.
 
 Team Mates:
 1. Wan Muhammad Syamil bin W Mohd Yusof ( 2220561 )
+2. Danish Darwis bin Shathibi ( 2210665 )
 
 ## Rules
 1. You are allowed to have **3 group** members.

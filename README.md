@@ -343,10 +343,16 @@ docker run --detach -it debian
 CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
 f65be1987f84   debian    "bash"    4 minutes ago   Up 4 minutes             romantic_jackson
 ```
+My version
+```bash
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
+11ff2ff4dff3   debian    "bash"    2 minutes ago   Up 2 minutes             elegant_thompson
+```
 
 3. Keep note of the name used by your container, this is usually given random names unless you specify your own name. Now run a bash command on the container. Make sure you use the name of your container instead of the one shown here. 
 ```bash
-docker exec -i -t romantic_jackson /bin/bash
+docker exec -i -t elegant_thompson /bin/bash
 ```
 
 4. Create a file on the container. First you must make sure you are in the bash command prompt of the container. The container is new, and does not have any software other than the debian OS. To create a new file, you will need an editor installed. In the bash shell of the container, run the package manager apt-get to install nano text editor. 
@@ -373,6 +379,23 @@ f65be1987f84   debian    "bash"    19 minutes ago   Exited (137) 18 seconds ago 
 
 @joeynor ➜ /workspaces/OSProject (main) $ docker restart romantic_jackson
 ```
+My version
+```bash
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker stop elegant_thompson
+elegant_thompson
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                        PORTS     NAMES
+11ff2ff4dff3   debian    "bash"    10 minutes ago   Exited (137) 16 seconds ago             elegant_thompson
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker restart elegant_thompson
+elegant_thompson
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker exec -i -t elegant_thompson /bin/bash
+root@11ff2ff4dff3:/# cd /root
+root@11ff2ff4dff3:~# ls
+helloworld.txt
+root@11ff2ff4dff3:~# cat helloworld.txt
+hello world!
+```
+The file in the container still available
 
 7. Stop the container and delete the container. What happened to your helloworld.txt?
 
@@ -386,10 +409,35 @@ f65be1987f84   debian    "bash"    19 minutes ago   Exited (137) 18 seconds ago 
 @joeynor ➜ /workspaces/OSProject (main) $ docker rm romantic_jackson
 ```
 
+My version :
+```bash
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker stop elegant_thompson
+elegant_thompson
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                        PORTS     NAMES
+11ff2ff4dff3   debian    "bash"    15 minutes ago   Exited (137) 21 seconds ago             elegant_thompson
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker rm elegant_thompson
+elegant_thompson
+```
+My helloworld.txt files will be deleted when we remove the container
+
 ***Questions:***
 
-1. Are files in the container persistent. Why not?. ***(1 mark)*** __Fill answer here__.
-2. Can we run two, or three instances of debian linux? . ***(1 mark)*** __Fill answer here__.
+1. Are files in the container persistent. Why not?. ***(1 mark)*** __The files in the container is not persistent when we remove the container because the file is attacheed to the container. Removing the container will result of the file will be deleted also__.
+2. Can we run two, or three instances of debian linux? . ***(1 mark)*** __Yes__
+```bash
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker run --detach -it debian
+5d1c6f3faf1cfc82655e41025a4bf7f26a916645e532544c878e36c468c42f1b
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker run --detach -it debian
+7e58849accdbcb4e19066f6252b2945345ba8a874ea117b7dbc52f3046501fa2
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker run --detach -it debian
+8090277bf1d83f441b766d80cbff2def5ac429df1dff39dcb43007faed4e6bcb
+@syamilu ➜ /workspaces/NatSysProject (main) $ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
+8090277bf1d8   debian    "bash"    5 seconds ago   Up 3 seconds             jolly_mirzakhani
+7e58849accdb   debian    "bash"    7 seconds ago   Up 6 seconds             friendly_gauss
+5d1c6f3faf1c   debian    "bash"    9 seconds ago   Up 8 seconds             jovial_hugle
+```
 
 ## Running your own container with persistent storage
 
@@ -405,17 +453,54 @@ At the terminal, create a new directory called **myroot**, and run a instance of
 
 @joeynor ➜ /workspaces/OSProject/myroot (main) $ docker run --detach -it -v /workspaces/OSProject/myroot:/root debian
 ```
+My version :
+```bash
+@syamilu ➜ /workspaces/NatSysProject (main) $ mkdir myroot
+@syamilu ➜ /workspaces/NatSysProject (main) $ cd myroot/
+@syamilu ➜ /workspaces/NatSysProject/myroot (main) $ pwd
+/workspaces/NatSysProject/myroot
+@syamilu ➜ /workspaces/NatSysProject/myroot (main) $ docker run --detach -it -v /workspaces/NatSysProject/myroot:/root debian
+60c026be0cca46c9fd6694c8165a52c743e3a2c419f1378a33c46d792f559f74
+@syamilu ➜ /workspaces/NatSysProject/myroot (main) $ docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
+60c026be0cca   debian    "bash"    4 seconds ago   Up 3 seconds             tender_panini
+@syamilu ➜ /workspaces/NatSysProject/myroot (main) $ docker exec -i -t tender_panini /bin/bash
+root@60c026be0cca:~# vim helloearth.txt
+root@60c026be0cca:~# ls
+helloearth.txt
+@syamilu ➜ /workspaces/NatSysProject (main) $ cd myroot/
+@syamilu ➜ /workspaces/NatSysProject/myroot (main) $ ls
+helloearth.txt
+```
 
 ***Questions:***
 
-1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** __Fill answer here__.
+1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** __root root__
+```bash
+@syamilu ➜ /workspaces/NatSysProject/myroot (main) $ ls -la
+total 16
+drwxrwxrwx+ 2 codespace codespace 4096 Jun 11 03:37 .
+drwxrwxrwx+ 6 codespace root      4096 Jun 11 03:32 ..
+-rw-------  1 root      root      1028 Jun 11 03:37 .viminfo
+-rw-rw-rw-  1 root      root        13 Jun 11 03:37 helloearth.txt
+```
 2. Can you change the permission of the files to user codespace.  You will need this to be able to commit and get points for this question. ***(2 mark)***
 ```bash
 //use sudo and chown
 sudo chown -R codespace:codespace myroot
 
 ```
-*** __Fill answer here__.***
+*** __Yes i can__.***
+```bash
+@syamilu ➜ /workspaces/NatSysProject/myroot (main) $ sudo chown -R codespace:codespace helloearth.txt 
+@syamilu ➜ /workspaces/NatSysProject/myroot (main) $ sudo chown -R codespace:codespace .viminfo 
+@syamilu ➜ /workspaces/NatSysProject/myroot (main) $ ls -la
+total 16
+drwxrwxrwx+ 2 codespace codespace 4096 Jun 11 03:37 .
+drwxrwxrwx+ 6 codespace root      4096 Jun 11 03:32 ..
+-rw-------  1 codespace codespace 1028 Jun 11 03:37 .viminfo
+-rw-rw-rw-  1 codespace codespace   13 Jun 11 03:37 helloearth.txt
+```
 
 ## You are on your own, create your own static webpage
 

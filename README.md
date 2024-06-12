@@ -569,18 +569,22 @@ docker run -itd --net rednet --name c2 busybox sh
 busybox =  lightweight Unix utility that combines many common UNIX utilities into a single small executable, making it ideal for minimal environments like Docker containers.
 --name = assign custom name to a container.
 ```
+
 2. Explore the network using the command ```docker network ls```, show the output of your terminal. ***(1 mark)***
   <img src="./screenshot/docker_network_ls.png" width="70%">
+
 3. Using ```docker inspect c1``` and ```docker inspect c2``` inscpect the two network. What is the gateway of bluenet and rednet.? ***(1 mark)***
   ```bash
   bluenet: "Gateway": "172.18.0.1",
   rednet: "Gateway": "172.19.0.1",
   ```
+
 4. What is the network address for the running container c1 and c2.
   ```bash
   c1: "IPAddress": "172.18.0.2",
   c2: "IPAddress": "172.19.0.2",
   ```
+
 5. Using the command ```docker exec c1 ping c2```, which basically issue a ping from container c1 to c2. Are you able to ping? Show your output . ***(1 mark)***
   ```bash
   I can't ping
